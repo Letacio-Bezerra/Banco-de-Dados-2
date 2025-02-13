@@ -16,3 +16,16 @@ create table alunos(
 --inserindo um registro na tabela
 insert into alunos(nome,email,telefone,dataNasc)
 values('José da Silva','jose@fiap.com.br','11998875544','10-30-2009')
+
+insert into alunos(nome,email,telefone,dataNasc)
+values('Roger Nogueira','jose@fiap.com.br','11598875544','10-20-2009')
+
+select * from alunos
+
+--alterar dados
+update alunos set telefone='11223386655'
+where rm=1
+
+--excluir dados
+delete from alunos
+where rm=2
