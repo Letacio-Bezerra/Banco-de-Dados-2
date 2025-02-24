@@ -1,14 +1,12 @@
 CREATE DATABASE empresa;
-GO
 
 USE empresa;
-GO
+
 
 CREATE TABLE Pecas (
     ID_Peca INT PRIMARY KEY IDENTITY(1,1),
     Nome VARCHAR(100),
     Tipo VARCHAR(50),
-    Fabricante VARCHAR(100),
     Preco FLOAT
 );
 
@@ -34,26 +32,24 @@ CREATE TABLE ComputadorPeca (
     FOREIGN KEY (ID_Peca) REFERENCES Pecas(ID_Peca)
 );
 
--- Inserção de dados nas tabelas
-INSERT INTO Pecas (Nome, Tipo, Fabricante, Preco) VALUES
-('Processador X', 'Processador', 'Intel', 1000.00),
-('Placa de Vídeo', 'GPU', 'Nvidia', 1500.00),
-('Gabinete Y', 'Gabinete', 'Corsair', 300.00),
-('Memória RAM Z', 'Memória', 'Kingston', 200.00),
-('SSD A', 'Armazenamento', 'Samsung', 250.00);
+
+INSERT INTO Pecas (Nome, Tipo, Preco) VALUES
+('Processador X', 'Processador', 1000.00),
+('Placa de V�deo', 'GPU', 1500.00),
+('Gabinete Y', 'Gabinete', 300.00),
+('Mem�ria RAM Z', 'Mem�ria', 200.00),
+('SSD A', 'Armazenamento', 250.00);
 
 INSERT INTO Clientes (Nome, Endereco, Email, Telefone) VALUES
-('João Silva', 'Rua A, 123', 'joao@gmail.com', '11111111111'),
-('Maria Souza', 'Avenida B, 456', 'maria@yahoo.com', '22222222222'),
-('Carlos Pereira', 'Rua C, 789', 'carlos@hotmail.com', '33333333333'),
-('Ana Oliveira', 'Praça D, 101', 'ana@outlook.com', '44444444444'),
-('Pedro Lima', 'Avenida E, 202', 'pedro@gmail.com', '55555555555');
+('Jo�o Silva', 'Rua A, 111', 'joao@gmail.com', '11111111111'),
+('Maria Souza', 'Rua B, 222', 'maria@yahoo.com', '22222222222'),
+('Carlos Pereira', 'Rua C, 333', 'carlos@hotmail.com', '33333333333'),
+('Ana Oliveira', 'Rua D, 444', 'ana@outlook.com', '44444444444'),
+('Pedro Lima', 'Rua E, 555', 'pedro@gmail.com', '55555555555');
 
--- Inserção de computadores
 INSERT INTO Computadores (ID_Cliente) VALUES
 (1), (2), (3), (4), (5);
 
--- Inserção de peças nos computadores
 INSERT INTO ComputadorPeca (ID_Computador, ID_Peca) VALUES
 (1, 1), (1, 2), (1, 3), (1, 4), (1, 5),
 (2, 1), (2, 2), (2, 3), (2, 4), (2, 5),
@@ -61,29 +57,29 @@ INSERT INTO ComputadorPeca (ID_Computador, ID_Peca) VALUES
 (4, 2), (4, 3), (4, 4),
 (5, 1), (5, 2), (5, 5);
 
--- Consultas
 
--- 1. Todos os computadores e todos os clientes
+-- 1
 SELECT * FROM Computadores;
 SELECT * FROM Clientes;
+SELECT * FROM Pecas;
 
--- 2. Todos os computadores adquiridos por um cliente específico
+-- 2
 SELECT c.* 
 FROM Computadores c
-WHERE c.ID_Cliente = 1;
+WHERE c.ID_Cliente = 2;
 
--- 3. Todos os computadores que possuem uma determinada peça específica
+-- 3
 SELECT DISTINCT cp.ID_Computador
 FROM ComputadorPeca cp
-WHERE cp.ID_Peca = 1;
+WHERE cp.ID_Peca = 5;
 
--- 4. Exiba os dados do computador e do cliente que adquiriu um computador específico
+-- 4
 SELECT c.*, cl.*
 FROM Computadores c
 JOIN Clientes cl ON c.ID_Cliente = cl.ID_Cliente
 WHERE c.ID_Computador = 1;
 
--- 5. Os dados dos clientes que já adquiriram computadores com uma peça específica
+-- 5
 SELECT DISTINCT cl.*
 FROM Clientes cl
 JOIN Computadores c ON cl.ID_Cliente = c.ID_Cliente
