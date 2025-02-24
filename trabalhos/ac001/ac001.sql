@@ -1,6 +1,6 @@
-CREATE DATABASE empresa;
+CREATE DATABASE empresa3;
 
-USE empresa;
+USE empresa3;
 
 
 CREATE TABLE Pecas (
@@ -25,18 +25,18 @@ CREATE TABLE Computador (
     ID_Placa_Video INT,
     ID_Armazenamento INT,
     ID_Placa_Mae INT,
-    FOREIGN KEY (ID_Gabinete) REFERENCES Pecas(ID_Peca),
-    FOREIGN KEY (ID_Processador) REFERENCES Pecas(ID_Peca),
-    FOREIGN KEY (ID_Placa_Video) REFERENCES Pecas(ID_Peca),
-    FOREIGN KEY (ID_Armazenamento) REFERENCES Pecas(ID_Peca),
-    FOREIGN KEY (ID_Placa_Mae) REFERENCES Pecas(ID_Peca)
+    CONSTRAINT fk_computador_gabinete FOREIGN KEY (ID_Gabinete) REFERENCES Pecas(ID_Peca),
+    CONSTRAINT fk_computador_processador FOREIGN KEY (ID_Processador) REFERENCES Pecas(ID_Peca),
+    CONSTRAINT fk_computador_video FOREIGN KEY (ID_Placa_Video) REFERENCES Pecas(ID_Peca),
+    CONSTRAINT fk_computador_armazenamento FOREIGN KEY (ID_Armazenamento) REFERENCES Pecas(ID_Peca),
+    CONSTRAINT fk_computador_mae FOREIGN KEY (ID_Placa_Mae) REFERENCES Pecas(ID_Peca)
 );
 
 CREATE TABLE Clientes_Computadores (
     ID_Cliente INT,
     ID_Computador INT,
-    FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
-    FOREIGN KEY (ID_Computador) REFERENCES Computador(ID_Computador)
+    CONSTRAINT fk_compucli_idcliente FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
+    CONSTRAINT fk_compucli_idcomputador FOREIGN KEY (ID_Computador) REFERENCES Computador(ID_Computador)
 );
 
 INSERT INTO Clientes (Nome, Endereco, Email, Telefone) VALUES
@@ -95,6 +95,19 @@ INSERT INTO Clientes_Computadores (ID_Cliente, ID_Computador) VALUES
 (4, 4),
 (5, 5);
 
+INSERT INTO Clientes_Computadores (ID_Cliente, ID_Computador) VALUES
+(1,2);
+
+INSERT INTO Computador (ID_Gabinete, ID_Processador, ID_Placa_Video, ID_Armazenamento, ID_Placa_Mae) VALUES
+(2, 6, 13, 17, 24);
+
+
+
+SELECT * FROM Clientes
+SELECT * FROM Computador
+SELECT * FROM Pecas
+SELECT * FROM Clientes_Computadores
+WHERE ID_Cliente = 1;
 
 -- 1
 SELECT * FROM Computador;
@@ -102,27 +115,6 @@ SELECT * FROM Clientes;
 
 
 -- 2
-SELECT Computador.*
-FROM Computador JOIN Clientes_Computadores ON Computador.ID_Computador = Clientes_Computadores.ID_Computador
-WHERE Clientes_Computadores.ID_Cliente = 1;
-
-
--- 3
-SELECT * FROM Computador
-WHERE ID_Gabinete = 2;
-
-
--- 4
-SELECT Clientes.*, Computador.*
+SELECT ID_Computador
 FROM Computador
-JOIN Clientes_Computadores ON Computador.ID_Computador = Clientes_Computadores.ID_Computador
-JOIN Clientes ON Clientes_Computadores.ID_Cliente = Clientes.ID_Cliente
-WHERE Computador.ID_Computador = 1;
-
-
--- 5
-SELECT DISTINCT Clientes.*
-FROM Clientes
-JOIN Clientes_Computadores ON Clientes.ID_Cliente = Clientes_Computadores.ID_Cliente
-JOIN Computador ON Clientes_Computadores.ID_Computador = Computador.ID_Computador
-WHERE Computador.ID_Gabinete = 3;
+INNER JOIN Clientes_Computadores ON Clientes_Computadores.ID_Cliente=Computador.ID_Computador
