@@ -1,6 +1,6 @@
-CREATE DATABASE empresa2;
+CREATE DATABASE empresa;
 
-USE empresa2;
+USE empresa;
 
 
 CREATE TABLE Pecas (
@@ -40,7 +40,7 @@ CREATE TABLE Clientes_Computadores (
 );
 
 INSERT INTO Clientes (Nome, Endereco, Email, Telefone) VALUES
-('Jo„o Silva', 'Rua A, 111', 'joao@gmail.com', '11111111111'),
+('Jo√£o Silva', 'Rua A, 111', 'joao@gmail.com', '11111111111'),
 ('Maria Souza', 'Rua B, 222', 'maria@yahoo.com', '22222222222'),
 ('Carlos Pereira', 'Rua C, 333', 'carlos@hotmail.com', '33333333333'),
 ('Ana Oliveira', 'Rua D, 444', 'ana@outlook.com', '44444444444'),
@@ -61,11 +61,11 @@ INSERT INTO Pecas (Nome, Tipo, Preco) VALUES
 ('Processador Intel i5', 'Processador', 1499.99);
 
 INSERT INTO Pecas (Nome, Tipo, Preco) VALUES
-('Placa de VÌdeo RTX 3080', 'Placa de VÌdeo', 3499.99),
-('Placa de VÌdeo RX 6800 XT', 'Placa de VÌdeo', 3299.99),
-('Placa de VÌdeo RTX 3070', 'Placa de VÌdeo', 2999.99),
-('Placa de VÌdeo RX 6700 XT', 'Placa de VÌdeo', 2799.99),
-('Placa de VÌdeo RTX 3060', 'Placa de VÌdeo', 2499.99);
+('Placa de V√≠deo RTX 3080', 'Placa de V√≠deo', 3499.99),
+('Placa de V√≠deo RX 6800 XT', 'Placa de V√≠deo', 3299.99),
+('Placa de V√≠deo RTX 3070', 'Placa de V√≠deo', 2999.99),
+('Placa de V√≠deo RX 6700 XT', 'Placa de V√≠deo', 2799.99),
+('Placa de V√≠deo RTX 3060', 'Placa de V√≠deo', 2499.99);
 
 INSERT INTO Pecas (Nome, Tipo, Preco) VALUES
 ('HDD 2TB', 'Armazenamento', 499.99),
@@ -75,11 +75,11 @@ INSERT INTO Pecas (Nome, Tipo, Preco) VALUES
 ('NVMe 1TB', 'Armazenamento', 999.99);
 
 INSERT INTO Pecas (Nome, Tipo, Preco) VALUES
-('Placa-M„e Mini ITX', 'Placa-M„e', 799.99),
-('Placa-M„e Micro ATX', 'Placa-M„e', 899.99),
-('Placa-M„e LGA1200', 'Placa-M„e', 1099.99),
-('Placa-M„e AM4', 'Placa-M„e', 999.99),
-('Placa-M„e B550', 'Placa-M„e', 949.99);
+('Placa-M√£e Mini ITX', 'Placa-M√£e', 799.99),
+('Placa-M√£e Micro ATX', 'Placa-M√£e', 899.99),
+('Placa-M√£e LGA1200', 'Placa-M√£e', 1099.99),
+('Placa-M√£e AM4', 'Placa-M√£e', 999.99),
+('Placa-M√£e B550', 'Placa-M√£e', 949.99);
 
 INSERT INTO Computador (ID_Gabinete, ID_Processador, ID_Placa_Video, ID_Armazenamento, ID_Placa_Mae) VALUES
 (1, 6, 11, 16, 21),
