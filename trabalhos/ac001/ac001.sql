@@ -1,6 +1,6 @@
-CREATE DATABASE empresa3;
+CREATE DATABASE empresa;
 
-USE empresa3;
+USE empresa;
 
 
 CREATE TABLE Pecas (
@@ -115,6 +115,29 @@ SELECT * FROM Clientes;
 
 
 -- 2
-SELECT ID_Computador
+SELECT Clientes.ID_Cliente, Clientes.Nome, Computador.ID_Computador
+FROM Clientes_Computadores
+JOIN Clientes ON Clientes_Computadores.ID_Cliente = Clientes.ID_Cliente
+JOIN Computador ON Clientes_Computadores.ID_Computador = Computador.ID_Computador
+WHERE Clientes.ID_Cliente = 1;
+
+-- 3
+SELECT Computador.ID_Computador
 FROM Computador
-INNER JOIN Clientes_Computadores ON Clientes_Computadores.ID_Cliente=Computador.ID_Computador
+JOIN Pecas ON Computador.ID_Gabinete = Pecas.ID_Peca
+WHERE Pecas.Nome = 'Gabinete Mid Tower';
+
+-- 4
+SELECT Clientes.ID_Cliente, Clientes.Nome, Clientes.Endereco, Clientes.Email, Clientes.Telefone, Computador.ID_Computador, Computador.ID_Armazenamento, Computador.ID_Gabinete, Computador.ID_Placa_Mae, Computador.ID_Placa_Video, Computador.ID_Processador
+FROM Clientes_Computadores
+JOIN Clientes ON Clientes_Computadores.ID_Cliente = Clientes.ID_Cliente
+JOIN Computador ON Clientes_Computadores.ID_Computador = Computador.ID_Computador
+WHERE Computador.ID_Computador = 2;
+
+-- 5
+SELECT DISTINCT Clientes.ID_Cliente, Clientes.Nome, Clientes.Endereco, Clientes.Email, Clientes.Telefone
+FROM Clientes_Computadores
+JOIN Clientes ON Clientes_Computadores.ID_Cliente = Clientes.ID_Cliente
+JOIN Computador ON Clientes_Computadores.ID_Computador = Computador.ID_Computador
+JOIN Pecas ON Computador.ID_Gabinete = Pecas.ID_Peca
+WHERE Pecas.Nome = 'Gabinete Mid Tower';
