@@ -40,11 +40,11 @@ CREATE TABLE Clientes_Computadores (
 );
 
 INSERT INTO Clientes (Nome, Endereco, Email, Telefone) VALUES
-('João Silva', 'Rua A, 111', 'joao@gmail.com', '11111111111'),
-('Maria Souza', 'Rua B, 222', 'maria@yahoo.com', '22222222222'),
-('Carlos Pereira', 'Rua C, 333', 'carlos@hotmail.com', '33333333333'),
-('Ana Oliveira', 'Rua D, 444', 'ana@outlook.com', '44444444444'),
-('Pedro Lima', 'Rua E, 555', 'pedro@gmail.com', '55555555555');
+('Jorge', 'Rua Jorge, 111', 'jorge@gmail.com', '11111111111'),
+('Sett', 'Rua Sett, 222', 'sett@gmail.com', '22222222222'),
+('Voliba', 'Rua Voliba, 333', 'voliba@gmail.com', '33333333333'),
+('Mordeka', 'Rua Mordeka, 444', 'mordeka@gmail.com', '44444444444'),
+('Briar', 'Rua Briar, 555', 'briar@gmail.com', '55555555555');
 
 INSERT INTO Pecas (Nome, Tipo, Preco) VALUES
 ('Gabinete ATX', 'Gabinete', 499.99),
@@ -68,11 +68,11 @@ INSERT INTO Pecas (Nome, Tipo, Preco) VALUES
 ('Placa de Vídeo RTX 3060', 'Placa de Vídeo', 2499.99);
 
 INSERT INTO Pecas (Nome, Tipo, Preco) VALUES
-('HDD 2TB', 'Armazenamento', 499.99),
-('HDD 4TB', 'Armazenamento', 799.99),
+('HD 2TB', 'Armazenamento', 499.99),
+('HD 4TB', 'Armazenamento', 799.99),
 ('SSD 500GB', 'Armazenamento', 599.99),
 ('SSD 2TB', 'Armazenamento', 1199.99),
-('NVMe 1TB', 'Armazenamento', 999.99);
+('HD 1TB', 'Armazenamento', 999.99);
 
 INSERT INTO Pecas (Nome, Tipo, Preco) VALUES
 ('Placa-Mãe Mini ITX', 'Placa-Mãe', 799.99),
