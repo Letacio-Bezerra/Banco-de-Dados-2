@@ -1,6 +1,6 @@
-CREATE DATABASE empresa5;
+CREATE DATABASE empresa;
 
-USE empresa5;
+USE empresa;
 
 
 CREATE TABLE Pecas (
@@ -158,16 +158,14 @@ FROM Computador_Pecas
 WHERE ID_Peca = 1;
 
 -- 4
-SELECT Clientes.ID_Cliente, Clientes.Nome, Clientes.Endereco, Clientes.Email, Clientes.Telefone, Computador.ID_Computador, Computador_Pecas.ID_Peca
-FROM 
-JOIN Clientes ON Clientes_Computadores.ID_Cliente = Clientes.ID_Cliente
-JOIN Computador ON Clientes_Computadores.ID_Computador = Computador.ID_Computador
+SELECT Computador.ID_Computador, Clientes.Nome, Clientes.Endereco, Clientes.Email, Clientes.Telefone
+FROM Computador
+JOIN Clientes ON Computador.ID_Cliente = Clientes.ID_Cliente
 WHERE Computador.ID_Computador = 2;
 
 -- 5
-SELECT DISTINCT Clientes.ID_Cliente, Clientes.Nome, Clientes.Endereco, Clientes.Email, Clientes.Telefone
-FROM Clientes_Computadores
-JOIN Clientes ON Clientes_Computadores.ID_Cliente = Clientes.ID_Cliente
-JOIN Computador ON Clientes_Computadores.ID_Computador = Computador.ID_Computador
-JOIN Pecas ON Computador.ID_Gabinete = Pecas.ID_Peca
-WHERE Pecas.Nome = 'Gabinete Mid Tower';
+SELECT Clientes.ID_Cliente, Clientes.Nome, Clientes.Endereco, Clientes.Email, Clientes.Telefone
+FROM Computador_Pecas
+JOIN Computador ON Computador_Pecas.ID_Computador = Computador.ID_Computador
+JOIN Clientes ON Computador.ID_Cliente = Clientes.ID_Cliente
+WHERE Computador_Pecas.ID_Peca = 1;
