@@ -58,3 +58,81 @@ on multas after insert
 			set pontosCNH = pontosCNH + @pontos
 			where motoristaID = @motoristaID;
 	end;
+
+create procedure inserirMotorista
+	@nome varchar(50),
+    @CNH varchar(20),
+    @pontosCNH int
+as
+insert into motoristas(nome, CNH, pontosCNH)
+values (@nome, @CNH, @pontosCNH)
+select motoristaID, nome, CNH, pontosCNH from motoristas
+order by motoristaID desc
+
+exec inserirMotorista 'Jorge','123456789', 0
+exec inserirMotorista 'Volibear','987654321', 0
+
+
+create procedure inserirCarro
+	@motoristaID int,
+    @placa varchar(7),
+    @modelo varchar(50),
+	@ano int
+as
+insert into carros(motoristaID, placa, modelo, ano)
+values (@motoristaID, @placa, @modelo, @ano)
+select carroID, motoristaID, placa, modelo, ano from carros
+order by carroID desc
+
+exec inserirCarro 1, 'ABC1234', 'Honda Civic', 2020
+exec inserirCarro 2, 'XYZ5678', 'Toyota Corolla', 2021
+
+
+create procedure inserirMulta
+	@carroID int,
+    @dataMulta date,
+	@pontos int
+as
+insert into multas(carroID, DataMulta, Pontos)
+values (@carroID, @dataMulta, @pontos)
+select multaID, carroID, dataMulta, pontos from multas
+order by multaID desc
+
+exec inserirMulta 1, '2025-03-25', 3
+exec inserirMulta 2, '2025-03-26', 5
+exec inserirMulta 1, '2025-03-25', 3
+
+
+create procedure selectMotoristaMulta
+as
+    select 
+        m.motoristaID, m.nome, m.CNH, m.pontosCNH, multa.multaID, multa.DataMulta, multa.Pontos
+    from motoristas m
+    inner join prontuarios p on m.motoristaID = p.motoristaID
+    inner join multas multa on p.multaID = multa.multaID;
+
+exec selectMotoristaMulta
+
+
+create procedure selectMotoristaMultaEspecifico
+	@motoristaID int
+as
+    select 
+        m.motoristaID, m.nome, m.CNH, m.pontosCNH, multa.multaID, multa.DataMulta, multa.Pontos
+    from motoristas m
+	inner join prontuarios p on m.motoristaID = p.motoristaID
+    inner join multas multa on p.multaID = multa.multaID
+    where m.motoristaID = @motoristaID;
+
+exec selectMotoristaMultaEspecifico 1
+
+
+create procedure selectPontoTotal
+	@motoristaID int
+as
+    select 
+        m.motoristaID, m.nome, m.pontosCNH
+    from motoristas m
+    where m.motoristaID = @motoristaID;
+
+exec selectPontoTotal 1
