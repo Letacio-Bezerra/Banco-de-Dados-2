@@ -59,7 +59,9 @@ on multas after insert
 			where motoristaID = @motoristaID;
 	end;
 
-create procedure inserirMotorista
+
+--Motorista
+create procedure insertMotorista
 	@nome varchar(50),
     @CNH varchar(20),
     @pontosCNH int
@@ -69,11 +71,12 @@ values (@nome, @CNH, @pontosCNH)
 select motoristaID, nome, CNH, pontosCNH from motoristas
 order by motoristaID desc
 
-exec inserirMotorista 'Jorge','123456789', 0
-exec inserirMotorista 'Volibear','987654321', 0
+exec insertMotorista 'Jorge','123456789', 0
+exec insertMotorista 'Volibear','987654321', 0
 
 
-create procedure inserirCarro
+--Carro
+create procedure insertCarro
 	@motoristaID int,
     @placa varchar(7),
     @modelo varchar(50),
@@ -84,11 +87,12 @@ values (@motoristaID, @placa, @modelo, @ano)
 select carroID, motoristaID, placa, modelo, ano from carros
 order by carroID desc
 
-exec inserirCarro 1, 'ABC1234', 'Honda Civic', 2020
-exec inserirCarro 2, 'XYZ5678', 'Toyota Corolla', 2021
+exec insertCarro 1, 'ABC1234', 'Honda Civic', 2020
+exec insertCarro 2, 'XYZ5678', 'Toyota Corolla', 2021
 
 
-create procedure inserirMulta
+--Multa
+create procedure insertMulta
 	@carroID int,
     @dataMulta date,
 	@pontos int
@@ -98,11 +102,12 @@ values (@carroID, @dataMulta, @pontos)
 select multaID, carroID, dataMulta, pontos from multas
 order by multaID desc
 
-exec inserirMulta 1, '2025-03-25', 3
-exec inserirMulta 2, '2025-03-26', 5
-exec inserirMulta 1, '2025-03-25', 3
+exec insertMulta 1, '2025-03-25', 3
+exec insertMulta 2, '2025-03-26', 5
+exec insertMulta 1, '2025-03-25', 3
 
 
+--Motorista e Multa
 create procedure selectMotoristaMulta
 as
     select 
@@ -114,6 +119,7 @@ as
 exec selectMotoristaMulta
 
 
+--Motorista e multa especifico
 create procedure selectMotoristaMultaEspecifico
 	@motoristaID int
 as
@@ -127,6 +133,7 @@ as
 exec selectMotoristaMultaEspecifico 1
 
 
+--Pontos totais
 create procedure selectPontoTotal
 	@motoristaID int
 as
