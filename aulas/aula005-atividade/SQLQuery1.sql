@@ -28,8 +28,10 @@ on produtos after update
 			@estoque int,
 			@quantidade_anterior int,
 			@quantidade_nova int,
-			@data datetime;
 
 			select @id = id_produto, @estoque = estoque from updated;
 
-			select @quantidade_anterior = quantidade_anterior, @quantidade_nova = quantidade_nova from historicoEstoque;
+			select @quantidade_anterior = @quantidade_nova - @estoque from historicoEstoque;
+
+			insert into historicoEstoque(id_produto, quantidade_anterior, quantidade_nova)
+			values (@id, @quantidade_anterior, @quantidade_nova)
