@@ -52,16 +52,28 @@ on produtos after insert
 
 create trigger updateEstoque
 on produtos after update
-	as
-	begin
-		declare
-			@id int,
-			@quantidade_anterior int,
-			@quantidade_nova int;
+as
+begin
+    declare
+        @id int,
+        @quantidade_anterior int,
+        @quantidade_nova int;
 
-			select @quantidade_anterior = @quantidade_nova before update,
+			select 
+				@id = d.id_produto, 
+				@quantidade_anterior = d.estoque,
+				@quantidade_nova = i.estoque
+			from 
+				deleted d
+			inner join 
+				inserted i on d.id_produto = i.id_produto;
 
-			select @id = id_produto, @quantidade_nova = estoque, @quantidade_anterior from updated;
-
+			insert into historicoEstoque(id_produto, data_alteracao, quantidade_anterior, quantidade_nova)
+			values (@id, GETDATE(), @quantidade_anterior, @quantidade_nova);
+end
 
 select * from historicoEstoque
+
+update produtos
+set estoque = 30
+where id_produto = 2
