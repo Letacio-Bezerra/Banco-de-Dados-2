@@ -1,6 +1,6 @@
-create database ex1
+create database ex2
 
-use ex1
+use ex2
 
 create table produtos(
 	id_produto int primary key identity,
@@ -19,6 +19,20 @@ create table historicoEstoque(
 )
 
 
+create procedure adicionarProduto
+		@nome varchar(100),
+		@estoque int,
+		@preco decimal(10,2)
+	as
+		insert into produtos(nome_produto, estoque, preco)
+		values (@nome, @estoque, @preco)
+
+		select id_produto, nome_produto, estoque, preco from produtos
+		order by id_produto desc
+
+exec adicionarProduto 'banana','5','5.00'
+
+
 create trigger update_produtos
 on produtos after update
 	as
@@ -35,3 +49,5 @@ on produtos after update
 
 			insert into historicoEstoque(id_produto, quantidade_anterior, quantidade_nova)
 			values (@id, @quantidade_anterior, @quantidade_nova)
+
+
