@@ -31,23 +31,37 @@ create procedure adicionarProduto
 		order by id_produto desc
 
 exec adicionarProduto 'banana','5','5.00'
+exec adicionarProduto 'uva','10','15.00'
 
 
-create trigger update_produtos
+create trigger insertProdutoHistorico
+on produtos after insert
+	as
+	begin
+		declare
+			@id int,
+			@quantidade_anterior int,
+			@quantidade_nova int;
+
+			select @id = id_produto, @quantidade_nova = estoque from inserted;
+
+			insert into historicoEstoque(id_produto, quantidade_anterior, quantidade_nova)
+			values (@id, 0, @quantidade_nova)
+
+		end
+
+create trigger updateEstoque
 on produtos after update
 	as
 	begin
 		declare
 			@id int,
-			@estoque int,
 			@quantidade_anterior int,
-			@quantidade_nova int,
+			@quantidade_nova int;
 
-			select @id = id_produto, @estoque = estoque from updated;
+			select @quantidade_anterior = @quantidade_nova before update,
 
-			select @quantidade_anterior = @quantidade_nova - @estoque from historicoEstoque;
-
-			insert into historicoEstoque(id_produto, quantidade_anterior, quantidade_nova)
-			values (@id, @quantidade_anterior, @quantidade_nova)
+			select @id = id_produto, @quantidade_nova = estoque, @quantidade_anterior from updated;
 
 
+select * from historicoEstoque
