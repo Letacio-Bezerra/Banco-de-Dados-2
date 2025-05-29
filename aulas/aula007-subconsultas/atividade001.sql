@@ -32,20 +32,5 @@ FROM clientes
 WHERE id_cliente IN (
 	SELECT id_cliente
 	FROM pedidos
-	WHERE valor > 100
+	WHERE valor > AVG(valor)
 );
-
-SELECT nome
-FROM clientes c
-WHERE EXISTS (
-	SELECT 1
-	FROM pedidos p
-	WHERE p.id_cliente = c.id_cliente
-	AND p.valor > 100
-);
-
-SELECT nome,
-	(SELECT MAX(valor)
-	FROM pedidos
-	WHERE id_cliente = c.id_cliente) AS maior_pedido
-	FROM clientes c;
